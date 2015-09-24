@@ -11,16 +11,23 @@ def mostAs_DP(n):
     return As[n]
   else:
     for i in range(6,n+1):
-      if As[i-3]*2 >= As[i-1]+copied[i-1]:
-        As[i] = 2*As[i-3]
-        copied[i] = As[i-3]
-      else:
-        As[i] = As[i-1] + copied[i-1]
+      P = As[i-1]+copied[i-1]  # 'copied' doesn't change; smallest valule
+      SCP = As[i-3]*2          # result in largest new 'copied' value
+      SCPP = As[i-4]*3
+      if P > SCP and P > SCPP:  # P largest
+        As[i] = P
         copied[i] = copied[i-1]
+      elif SCPP > SCP:          # SCPP largest
+        As[i] = SCPP
+        copied[i] = As[i-4]
+      else:
+        As[i] = SCP             # SCP largest
+        copied[i] = As[i-3]
         
   # print(As)
   # print(copied)        
   return As[-1]
+
 
 ''' Not as Good. ~O(N^2)? '''
 def mostAs_Rec(num):
@@ -41,13 +48,11 @@ def mostAs_Rec(num):
 			return res
 
 		else: # printed == 0, copied == 0
-			best = 0
-			for i in range(1,num+1):
-				curr = helper(num-i,0+i,0)
-				best = max(best,curr)
-			mem[(num, 0, 0)] = best
-			return best
+			res = helper(num-3,0+3,0)	# We always start with at least 3 'A's
+			mem[(num, 0, 0)] = res
+			return res
 
 	return helper(num,0,0)
 
-print(mostAs_Rec(20))
+print(mostAs_Rec(17))
+print(mostAs_DP(17))
