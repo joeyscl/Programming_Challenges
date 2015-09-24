@@ -47,4 +47,4 @@ def queens(n):
 
 	return res
 
-print(queens(9))
+print(queens(7))
