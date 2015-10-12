@@ -9,6 +9,7 @@ def mostAs_DP(n):
 
   if n <= 5:
     return As[n]
+<<<<<<< HEAD
 
   else:
     for i in range(6,n+1):
@@ -24,6 +25,19 @@ def mostAs_DP(n):
         As[i] = SCPP
         copied[i] = As[i-4]
 
+=======
+  else:
+    for i in range(6,n+1):
+      P = As[i-1]+copied[i-1]  # 'copied' doesn't change; smallest valule
+      SCP = As[i-3]*2          # result in largest new 'copied' value
+      SCPP = As[i-4]*3
+      if P > SCP and P > SCPP:  # P largest
+        As[i] = P
+        copied[i] = copied[i-1]
+      elif SCPP > SCP:          # SCPP largest
+        As[i] = SCPP
+        copied[i] = As[i-4]
+>>>>>>> origin/master
       else:
         As[i] = SCP             # SCP largest
         copied[i] = As[i-3]
@@ -58,5 +72,10 @@ def mostAs_Rec(num):
 
 	return helper(num,0,0)
 
+<<<<<<< HEAD
 print(mostAs_Rec(20))
 print(mostAs_DP(20))
+=======
+print(mostAs_Rec(17))
+print(mostAs_DP(17))
+>>>>>>> origin/master
