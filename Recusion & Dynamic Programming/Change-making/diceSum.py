@@ -1,5 +1,5 @@
 '''given n, the number of dies, m the number of faces on each die, and s, the total the dies
-have to sum up to, return the number of die combinations there are (must use all dies)
+have to sum up to, return the number of die **combinations** there are (must use all dies)
 
 n = dies
 m = faces

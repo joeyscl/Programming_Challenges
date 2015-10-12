@@ -62,7 +62,7 @@ def LCS1(str1, str2):
 	for i in range(1,len1):
 		for j in range(1,len2):
 			if str1[i] == str2[j]:
-				tab[i][j] = tab[i-1][j-1] + " " + str1[i]
+				tab[i][j] = tab[i-1][j-1] + str1[i]
 			else:
 				if len(tab[i-1][j]) > len(tab[i][j-1]):
 					tab[i][j] = tab[i-1][j]

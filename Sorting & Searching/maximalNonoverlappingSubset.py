@@ -1,17 +1,10 @@
 # http://cpluspluslearning-petert.blogspot.co.uk/2015/06/data-structure-and-algorithm-find_19.html
 
 ''' find the biggest subset of pairs of tuples such that there is no overlap'''
-
+''' O(n log n) '''
 def maxSubset(arr):
 
-	'''Helper function: Sort each pair of ints, then sorts the array of pairs by the larger integer in the pair
-	ie: [(5,1),(4,6),(7,3)] -> [(1,5),(4,6),(3,7)]'''
-	def sort(arr):
-		arr = [tuple(sorted(tup)) for tup in arr]
-		arr.sort(key=lambda tup: tup[1])
-		return arr
-
-	arr = sort(arr)
+	arr = sorted([sorted(pair) for pair in arr])
 	res = [arr[0]]
 	for tup in arr[1:]:
 		if tup[0] >= res[-1][1]:
@@ -48,7 +41,7 @@ RESULT:
 
 '''
 
-'''  BAD 2^N algorithms below!'''
+'''  two BAD 2^N algorithms below!'''
 # def rec(arr):
 # 	res = [[]]
 # 	for tup in arr:
