@@ -5,6 +5,7 @@ eg. -1 1 3 -2 2 ans: -1 -2 1 3 2.
 There is an o(n)time complexity and o(1) space complexity.
 '''
 
+''' this doesn't work lol'''
 def part(arr):
 	size = len(arr)
 	i = 0

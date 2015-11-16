@@ -1,3 +1,34 @@
+''' my fav in-place version '''
+def QS(mylist):
+    def helper(low,hi):
+        print(mylist[low:hi+1])
+        if hi <= low:
+            return
+        else:
+            pivot = mylist[hi]
+            i = low
+            j = hi-1
+
+            while i <= j:
+                if mylist[i] < pivot:
+                    i += 1
+                else:
+                    mylist[i],mylist[j] = mylist[j],mylist[i]
+                    j -=1
+
+            # swap the pivot to its final place at index i 
+            mylist[i],mylist[hi] = mylist[hi],mylist[i]
+            helper(low,i-1)
+            helper(i+1,hi)
+
+    helper(0,len(mylist)-1)
+
+test1 = [4,2,5,1,6,0,3]
+QS(test1)
+print(test1)
+
+
+''' some other online versions '''
 def quickSort(mylist):
     def quickSortHelper(mylist, low, hi):
         if low < hi:
@@ -45,24 +76,9 @@ def partition1(mylist,low,hi):
     return left
             
 
-test1 = [4,2,5,1,3]
-quickSort(test1)
-print(test1)
-
-'''test2 = [2,1]
-test3 = [4,3,2,1]
-test4 = 
-
-
-quickSort(test2)
-quickSort(test3)
-quickSort(test4)
-            
-print(test1)
-print(test2)
-print(test3)
-print(test4)
-'''
+# test1 = [4,2,5,1,6,0,3]
+# quickSort(test1)
+# print(test1)
 
 
         

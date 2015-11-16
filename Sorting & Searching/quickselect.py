@@ -1,7 +1,11 @@
 from random import randint
-def quickselect(arr,index):
+from copy import deepcopy
+def qselect1(arr,k):
+	if k > len(arr):
+		print('invalid inputs')
+		return None
 
-	k = index
+	k -= 1 # we want to find the Kth low element, not element at Kth index
 
 	def qs(low, hi):		
 		temp = randint(low,hi)
@@ -23,7 +27,6 @@ def quickselect(arr,index):
 
 		arr[hi], arr[i] = arr[i], arr[hi]
 		print(arr)
-
 		if i == k:
 			return arr[i]
 		elif i > k:
@@ -31,9 +34,32 @@ def quickselect(arr,index):
 		else:
 			return qs(i+1,hi)
 
-
 	return qs(0,len(arr)-1)
 
-print(quickselect([6,7,9,2,5,0,3,1,8,4],5))
-		
+def qselect2(arr, n):
+	if n > len(arr):
+		print('invalid inputs')
+		return None
 
+	# find nth smallest element
+	pivotIdx = randint(0,len(arr)-1)
+	pivotVal = arr[pivotIdx]
+	arr[pivotIdx], arr[-1] = arr[-1], arr[pivotIdx]
+
+	lessThan = [num for num in arr[:-1] if num <= pivotVal]
+	greaterThan = [num for num in arr[:-1] if num > pivotVal]
+
+	# arr = lessThan + [pivotVal] + greaterThan
+	print(arr)
+
+	if len(lessThan) == n-1:
+		return pivotVal
+	elif len(lessThan) > n-1:
+		return qselect2(lessThan, n)
+	else:
+		return qselect2(greaterThan, n-1-len(lessThan))
+
+test = [6,7,9,2,5,0,3,1,8,4]
+print(qselect1(deepcopy(test),6))
+print('')
+print(qselect2(deepcopy(test),6))

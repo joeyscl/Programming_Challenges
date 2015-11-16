@@ -44,7 +44,7 @@ def DP(string):
 	return best.replace('$','')
 
 ''' O(n) aka: Manachar's algorithm'''
-def man(string):
+def manacher(string):
 
 	''' return *length* of palindrome centered around given index'''
 	def expand(mid):
@@ -96,11 +96,13 @@ def man(string):
 			mid = rightEdge+1
 
 	length = max(lens)
-	mid = lens.index(length)
-	leftEdge = mid - length//2
-	rightEdge = mid + length//2
+	mid = lens.index(length)//2
+	string = string.replace('$','')
+	leftEdge = mid - length//4
+	rightEdge = mid + length//4
 
-	return string[leftEdge:rightEdge+1].replace('$','')
+
+	return string[leftEdge:rightEdge+1]
 
 
 
@@ -112,5 +114,7 @@ tests = [test0,test1,test2]
 for t in tests:	
 	print(bruteForce(t))
 	print(DP(t))
-	print(man(t))
+	print(manacher(t))
 	print('')
+
+

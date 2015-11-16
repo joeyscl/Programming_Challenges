@@ -28,7 +28,7 @@ def rec(str1,str2):
 			return max(len(str1),len(str2))
 
 		else:
-			x = rec(str1[1:], str2[1:]) + (str1[0]!=str2[0]) # +1 if first character is same
+			x = helper(str1[1:], str2[1:]) + (str1[0]!=str2[0]) # +1 if first character is same
 
 			if len(str1) > len(str2):
 				y = helper(str1[1:], str2) + 1
@@ -40,5 +40,5 @@ def rec(str1,str2):
 
 	return helper(str1,str2)
 
-print(dp('abc','axbycz'))
+print(dp('bcd','abcd'))
 print(rec('abc','axbycz'))
