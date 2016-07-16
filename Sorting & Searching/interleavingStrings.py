@@ -95,8 +95,10 @@ def DP (s1,s2,s3):
 
 	for i in range(1,len(tab)):
 		for j in range(1,len(tab[0])):
-			if (s1[i] == s3[i+j-1] or s2[j] == s3[i+j-1]) and (tab[i-1][j] == 1 or tab[i][j-1] == 1):
+			if (s1[i] == s3[i+j] or s2[j] == s3[i+j]) and (tab[i-1][j] == 1 or tab[i][j-1] == 1):
 				tab[i][j] = 1
+
+	# print(tab)
 
 	return tab[-1][-1] == 1
 

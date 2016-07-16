@@ -18,7 +18,7 @@ def permutations(myArr):
 		return res
 
 
-a = permutations([1,2,3,4])
+a = permutations([1,2,3])
 for perm in a:
 	print(perm)
 
@@ -42,3 +42,22 @@ ie: given 1 2 3 4
 etc
 
 '''
+
+
+
+def genPerms(s):
+	if len(s) <= 1:
+		return [s]
+	else:
+		subPerms = genPerms(s[1:])
+		newPerms = []
+
+		for sub  in subPerms:
+			for i in range(len(sub)+1):
+				newPerm = sub[:i] + s[0] + sub[i:]
+				newPerms.append(newPerm)
+
+		return newPerms
+
+for s in genPerms('123'):
+	print(s)

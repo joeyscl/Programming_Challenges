@@ -48,9 +48,7 @@ test1 = 'aaxxaaxbbbbxbbb'
 test2 = 'aabbbabccc'
 test3 = 'abbbabbbbbbaa'
 print(findSub(test1))
-print()
 print(findSub(test2))
-print()
 print(findSub(test3))
 
 

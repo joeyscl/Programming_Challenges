@@ -1,0 +1,62 @@
+''' Given a string A and B, find the smallest substring of A that contains all the characters from B. 
+(implement solution in O(n), keep in mind chars in B can repeat). Assume A always has all characters of B '''
+
+def func(str1, str2):
+
+	def insert(tab,index):
+		ch = str1[index]
+		i = ord(ch)-ord('a')
+		tab[i] += 1
+
+	def remove(tab,index):
+		ch = str1[index]
+		i = ord(ch)-ord('a')
+		tab[i] -= 1
+
+	def isValid(tab,ref):
+		for i in range(26):
+			if tab[i] < ref[i]:
+				return False
+		return True
+
+
+
+	tab = [0] * 26
+	ref = [0] * 26
+
+	for ch in str2:
+		i = ord(ch)-ord('a')
+		ref[i] += 1
+
+	for ch in str1:
+		i = ord(ch)-ord('a')
+		tab[i] += 1
+
+	i = 0
+	j = len(str1)-1
+	while isValid(tab, ref):
+		remove(tab,j)
+		j -= 1
+	j += 1
+	insert(tab,j)
+
+
+	bestStr = str1
+	while j < len(str1):
+		if isValid(tab,ref):
+			bestStr = str1[i:j+1]
+			remove(tab,j)
+			j -= 1
+		else:
+			remove(tab,i)
+			i += 1
+
+			j += 1
+			if j >= len(str1):
+				break
+			else:
+				insert(tab,j)
+
+	return bestStr
+
+print(func('abcdeb','bbcd'))

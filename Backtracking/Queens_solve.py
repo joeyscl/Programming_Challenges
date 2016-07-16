@@ -80,4 +80,4 @@ def printNicely(board):
 	for row in board:
 		print(row)
 
-printNicely(queens(2))
+printNicely(queens(20))
