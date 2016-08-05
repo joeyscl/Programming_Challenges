@@ -3,12 +3,13 @@ ie: [ (1,5), (-3,2), (4,5), (2,6)] ---> (2,6) since it has 3 overlaps '''
 
 def mostOverlaps(intervals):
 
-	intervals = sorted(intervals, key = lambda x: x[0])
+	intervals = sorted(intervals, key = lambda x: x[0]+x[1]/10.0)
+	print(intervals)
 
 	best = [] 		# best interval so far
 	bestLen = 0 	# overlaps 'best' has
 
-	i = 0	
+	i = 0
 
 	while i < len(intervals):
 
@@ -17,6 +18,7 @@ def mostOverlaps(intervals):
 		next = i + 1	# the index of the next interval we want to skip to
 
 		for j in range(i+1, len(intervals)):
+			print("")
 			print(curr,intervals[j])
 
 			# case1: no overlap
@@ -28,7 +30,7 @@ def mostOverlaps(intervals):
 				break
 
 			# case2: complete overlap
-			if intervals[j][1] <= curr[1]:
+			elif intervals[j][1] <= curr[1]:
 				print('case2')
 				count += 1
 				if count > bestLen:
@@ -38,7 +40,7 @@ def mostOverlaps(intervals):
 
 
 			# case3: partial overlap
-			if intervals[j][1] > curr[1]:
+			elif intervals[j][1] >= curr[1]:
 				print('case3')
 				count += 1
 				if count > bestLen:
@@ -55,6 +57,6 @@ def mostOverlaps(intervals):
 	return best, bestLen
 
 
-test1 = [(-1,0),(0,4),(1,2),(1,2),(1,2),(1,2)]
+test1 = [(-1,0),(0,2),(1,2),(1,3),(2,4)]
 
 print(mostOverlaps(test1))

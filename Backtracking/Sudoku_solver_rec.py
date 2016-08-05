@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 def printBoard(board):
         print('')
         for i in range(9):
@@ -66,33 +68,10 @@ def solve(board):
             if board[r][c] != 0:
                 fixed.add((r,c))
 
-    def solver(i,j,numToInsert):
-        if i >= 9:
-            printBoard(board)
-            return
-        else:
-            if (i,j) not in fixed:
-                insert(i,j,numToInsert)
-                if not boardValid(i,j):
-                    remove(i,j)
-                    return
-                else:
-                    j += 1
-                    if j >= 9:
-                        j = 0
-                        i += 1
-                    for n in range(1,10):
-                        solver(i,j,n)
-            else:
-                j += 1
-                if j >= 9:
-                    j = 0
-                    i += 1
-                for n in range(1,10):
-                    solver(i,j,n)
+    def solver(i,j,B,numToInsert):
 
     for n in range(1,10):
-        solver(0, 0, n)
+        solver(0, 0, Board, n)
 
 
 

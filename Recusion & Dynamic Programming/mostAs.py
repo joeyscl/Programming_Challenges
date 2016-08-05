@@ -2,52 +2,71 @@
 determine the maximum number of a's an user can output on the screen given N
 number of keystrokes'''
 
+''' O(n)'''
+def mostAs_DP1(n):
+    As = [0,1,2,3,4,5] + [0]*(n-5)
+
+    if n <= 5:
+        return As[n]
+    else:
+        for i in range(6,n+1):
+            
+            SCP = As[i-3]*2     #select-copy-paste
+            SCPP = As[i-4]*3    #select-copy-paste*2
+            SCPPP = As[i-5]*4   #select-copy-paste*3
+
+            As[i] = max(SCP,SCPP,SCPPP)
+                
+        print(As)
+        return As[-1]
+
 ''' O(n) '''
-def mostAs_DP(n):
-  As = [0,1,2,3,4,5] + [0]*(n-5)
-  copied = [1,1,1,1,1,1] + [0]*(n-5)
+def mostAs_DP2(n):
+    As = [0,1,2,3,4,5] + [0]*(n-5)
+    copied = [1,1,1,1,1,1] + [0]*(n-5)
 
-  if n <= 5:
-    return As[n]
-<<<<<<< HEAD
+    if n <= 5:
+        return As[n]
+    else:
+        for i in range(6,n+1):
+            P = As[i-1]+copied[i-1]  # 'copied' doesn't change; smallest value
+            SCP = As[i-3]*2          # result in largest new 'copied' value
+            SCPP = As[i-4]*3
 
-  else:
-    for i in range(6,n+1):
-      P = As[i-1]+copied[i-1]  	# 'copied' doesn't change; smallest 'copied' value
-      SCP = As[i-3]*2          	# result in largest new 'copied' value
-      SCPP = As[i-4]*3			# middle 'copied' value
+            if P > SCP and P > SCPP:  # P largest
+                As[i] = P
+                copied[i] = copied[i-1]
 
-      if P > SCP and P > SCPP:  # P largest
-        As[i] = P
-        copied[i] = copied[i-1]
+            elif SCPP > SCP:          # SCPP largest
+                As[i] = SCPP
+                copied[i] = As[i-4]
 
-      elif SCPP > SCP:          # SCPP largest
-        As[i] = SCPP
-        copied[i] = As[i-4]
+            else:
+                As[i] = SCP           # SCP largest
+                copied[i] = As[i-3]
+                
+        print(As)
+        # print(copied)        
+        return As[-1]
 
-=======
-  else:
-    for i in range(6,n+1):
-      P = As[i-1]+copied[i-1]  # 'copied' doesn't change; smallest valule
-      SCP = As[i-3]*2          # result in largest new 'copied' value
-      SCPP = As[i-4]*3
-      if P > SCP and P > SCPP:  # P largest
-        As[i] = P
-        copied[i] = copied[i-1]
-      elif SCPP > SCP:          # SCPP largest
-        As[i] = SCPP
-        copied[i] = As[i-4]
->>>>>>> origin/master
-      else:
-        As[i] = SCP             # SCP largest
-        copied[i] = As[i-3]
-        
-  # print(As)
-  # print(copied)        
-  return As[-1]
+''' O(n^2) '''
+def mostAs_DPn2(n):
+    As = [0,1,2,3,4,5] + [0]*(n-5)
+
+    if n <= 5:
+        return As[n]
+    else:
+        for i in range(6,n+1):      
+
+            As[i] = max([As[i-j]*(j-1) for j in range(0,i-2)])  #   <---    SCP = As[i-3]*2
+                                                                #           SCPP = As[i-4]*3
+                                                                #           SCPPP = As[i-5]*4
+                                                                #           ...etc
+        print(As)
+        return As[-1]
 
 
-''' Not as Good. ~O(N^2)? '''
+''' Much slower. ~O(N^2)? '''
 def mostAs_Rec(num):
 	mem = {}
 	def helper(num, printed, copied):
@@ -72,10 +91,9 @@ def mostAs_Rec(num):
 
 	return helper(num,0,0)
 
-<<<<<<< HEAD
-print(mostAs_Rec(20))
-print(mostAs_DP(20))
-=======
-print(mostAs_Rec(17))
-print(mostAs_DP(17))
->>>>>>> origin/master
+
+
+print(mostAs_DP1(1000))
+print(mostAs_DP2(1000))
+print(mostAs_DPn2(1000))
+# print(mostAs_Rec(100))

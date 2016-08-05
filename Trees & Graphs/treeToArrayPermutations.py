@@ -1,7 +1,7 @@
 ''' A binary can be created from an array by inserting each element of the array successively 
 from left to right. Given a binary tree, return all possible arrays that could result in the tree'''
 
-# tree = { 4:[2,6], 2:[1,3], 6:[5,7] }
+tree = { 4:[2,6], 2:[1,3], 6:[5,7] }
 tree = { 4:[2,6], 2:[1,3] }
 # tree = { 2:[1,3] }
 

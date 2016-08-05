@@ -35,7 +35,7 @@ def LCA(Node, val1, val2):
 		LCA(node.left, val1, val2)
 
 	elif Node.val < val1 and Node.val < val2:
-		return VCA(node.right, val1, val2)
+		return LCA(node.right, val1, val2)
 
 	else:
 		return Node

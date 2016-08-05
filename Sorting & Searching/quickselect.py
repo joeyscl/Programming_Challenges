@@ -59,7 +59,7 @@ def qselect2(arr, n):
 	else:
 		return qselect2(greaterThan, n-1-len(lessThan))
 
-test = [6,7,9,2,5,0,3,1,8,4]
-print(qselect1(deepcopy(test),6))
+test = [5,3,2,3,3,1,0,4]
+print(qselect1(deepcopy(test),4))
 print('')
-print(qselect2(deepcopy(test),6))
+# print(qselect2(deepcopy(test),6))

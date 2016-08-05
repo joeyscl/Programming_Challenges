@@ -79,8 +79,15 @@ def solve(board):
     numToInsert = 1
 
     while i < 9:
+
+        if i < 0:
+            print("No solution")
+            break
+
         if (i,j) not in fixed:
             insert(i,j, numToInsert)
+        else:
+            pass
 
         if boardValid(i, j):
             numToInsert = 1

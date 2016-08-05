@@ -5,7 +5,7 @@ def BFS(head,num):
 	todo = []
 	node = head
 
-	while todo != []:
+	while todo != [] or none != None:
 		if node == None:
 			node = todo[0]
 			todo = todo[1:]

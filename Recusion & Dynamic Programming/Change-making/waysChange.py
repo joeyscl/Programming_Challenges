@@ -20,6 +20,9 @@ def ways_DP(cents, denoms):
 				ways += tab[i-1][rem]
 			tab[i][j] = ways
 
+	for x in tab:
+		print(x)
+
 	return(tab[-1][-1])
 
 ''' recursion + memoization is faster'''
@@ -57,7 +60,7 @@ def ways_rec (cents, denoms):
 	res = waysChangeHelper(cents,denoms)
 	return res
 
-print(ways_DP(1,[1,5,10,25]))
+print(ways_DP(10,[1,5,10,25]))
 # print(ways_rec(10000,[1,5,10,25]))
 
 
